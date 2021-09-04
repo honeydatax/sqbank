@@ -5,6 +5,7 @@ const dirs="./database"
 const names="./database/bank.dat"
 const sqlite="sqlite3 "+names
 const nulll=" 2> /dev/null"
+const separeter="--------------------------------"
 sub deletesmoves()
 	dim a as integer
 	dim b as string
@@ -130,6 +131,7 @@ sub moves()
 
 	print "leave a area of text out to exit"	
 	do
+		print separeter
 		print "dates yyyy\mm\dd: ";
 		line input b
 		if b="" then exit sub
@@ -179,6 +181,7 @@ sub add()
 	print "leave a area of text out to exit"
 	
 	do
+		print separeter
 		print "name: ";
 		line input a
 		if a="" then exit sub
