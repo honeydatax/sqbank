@@ -15,7 +15,7 @@ sub deletesmoves()
 	print "working....."
 		Open Pipe sqlite +" -header -column > " + report For output As #1
 			print #1,".width 16 25 "
-			print #1,"select ID,name from banks;"
+			print #1,"select ID,name from banks order by name;"
 			print #1,";"
 			print #1,".quit"
 		close 1
@@ -27,7 +27,8 @@ sub deletesmoves()
 		Open Pipe sqlite +" -header -column  > " + report For output As #1
 			print #1,".width 16 25 "
 			print #1,"select ID,name from banks where ID ="+str(a)+";"
-			print #1,"select * from moves where bank ="+str(a)+";"
+			print #1,".width 16 16 10 25 16 "
+			print #1,"select * from moves where bank ="+str(a)+" order by date ;"
 			print #1,";"
 			print #1,".quit"
 		close 1
@@ -38,8 +39,8 @@ sub deletesmoves()
 				input b
 				if b="-1" then exit sub
 			Open Pipe sqlite +" -header -column  "  For output As #1
-				print #1,".width 16 25 "
-				print #1,"select * from moves where ID ="+b+";"
+				print #1,".width 16 16 10 25 16 "
+				print #1,"select * from moves where ID ="+b+" order by date;"
 				print #1,"delete from moves where ID ="+b+";"
 				print #1,";"
 				print #1,".quit"
@@ -55,7 +56,7 @@ sub deletes()
 	print "working....."
 		Open Pipe sqlite +" -header -column > " + report For output As #1
 			print #1,".width 16 25 "
-			print #1,"select ID,name from banks;"
+			print #1,"select ID,name from banks order by name;"
 			print #1,";"
 			print #1,".quit"
 		close 1
@@ -73,8 +74,8 @@ sub deletes()
 			print #1,".quit"
 		close 1
 		Open Pipe sqlite +" -header -column  > " +report For output As #1
-			print #1,".width 16 25 "
-			print #1,"select * from banks ;"
+			print #1,".width 16 25 25 25 25 25 25"
+			print #1,"select * from banks order by name;"
 			print #1,";"
 			print #1,".quit"
 		close 1
@@ -89,7 +90,7 @@ sub reports()
 	print "working....."
 		Open Pipe sqlite +" -header -column > " + report For output As #1
 			print #1,".width 16 25 "
-			print #1,"select ID,name from banks;"
+			print #1,"select ID,name from banks order by name;"
 			print #1,";"
 			print #1,".quit"
 		close 1
@@ -101,7 +102,8 @@ sub reports()
 		Open Pipe sqlite +" -header -column  > " +report For output As #1
 			print #1,".width 16 25 "
 			print #1,"select ID,name from banks where ID ="+str(a)+";"
-			print #1,"select * from moves where bank ="+str(a)+";"
+			print #1,".width 16 16 10 25 16 "
+			print #1,"select * from moves where bank ="+str(a)+" order by date;"
 			print #1,"select sum(value) from moves where bank ="+str(a)+";"
 			print #1,";"
 			print #1,".quit"
@@ -117,7 +119,7 @@ sub moves()
 	print "working....."
 		Open Pipe sqlite +" -header -column > " + report For output As #1
 			print #1,".width 16 25 "
-			print #1,"select ID,name from banks;"
+			print #1,"select ID,name from banks order by name;"
 			print #1,";"
 			print #1,".quit"
 		close 1
@@ -159,7 +161,7 @@ sub finds()
 	print "working....."
 		Open Pipe sqlite +" -header -column > " + report For output As #1
 			print #1,".width 16 25 25 25 25 25 "
-			print #1,"select * from banks where name like '"+a+"';"
+			print #1,"select * from banks where name like '"+a+"' order by name;"
 			print #1,";"
 			print #1,".quit"
 		close 1
@@ -170,7 +172,7 @@ sub list()
 	print "working....."
 		Open Pipe sqlite +" -header -column > " + report For output As #1
 			print #1,".width 16 25 25 25 25 25 "
-			print #1,"select * from banks;"
+			print #1,"select * from banks order by name;"
 			print #1,";"
 			print #1,".quit"
 		close 1
