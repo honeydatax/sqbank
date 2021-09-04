@@ -17,7 +17,7 @@ sub deletesmoves()
 			print #1,";"
 			print #1,".quit"
 		close 1
-	shell program +" "+report + " > /dev/null"
+	shell program +" "+report + " 2> /dev/null"
 	cls
 		print "bank ID: ";
 		input a
@@ -38,7 +38,7 @@ sub deletesmoves()
 			print #1,";"
 			print #1,".quit"
 		close 1
-	shell program +" "+report + " > /dev/null"
+	shell program +" "+report + " 2> /dev/null"
 end sub 
 sub deletes()
 	dim a as integer
@@ -53,7 +53,7 @@ sub deletes()
 			print #1,";"
 			print #1,".quit"
 		close 1
-	shell program +" "+report + " > /dev/null"
+	shell program +" "+report + " 2> /dev/null"
 	cls
 		print "bank ID: ";
 		input a
@@ -72,7 +72,7 @@ sub deletes()
 			print #1,";"
 			print #1,".quit"
 		close 1
-	shell program +" "+report + " > /dev/null"
+	shell program +" "+report + " 2> /dev/null"
 end sub 
 sub reports()
 	dim a as integer
@@ -87,7 +87,7 @@ sub reports()
 			print #1,";"
 			print #1,".quit"
 		close 1
-	shell program +" "+report + " > /dev/null"
+	shell program +" "+report + " 2> /dev/null"
 	cls
 		print "bank ID: ";
 		input a
@@ -100,7 +100,7 @@ sub reports()
 			print #1,";"
 			print #1,".quit"
 		close 1
-	shell program +" "+report + " > /dev/null"
+	shell program +" "+report + " 2> /dev/null"
 end sub 
 sub moves()
 	dim a as integer
@@ -115,7 +115,7 @@ sub moves()
 			print #1,";"
 			print #1,".quit"
 		close 1
-	shell program +" "+report + " > /dev/null"
+	shell program +" "+report + " 2> /dev/null"
 	cls
 		print "bank ID: ";
 		input a
@@ -156,7 +156,7 @@ sub finds()
 			print #1,";"
 			print #1,".quit"
 		close 1
-	shell program +" "+report + " > /dev/null"
+	shell program +" "+report + " 2> /dev/null"
 end sub
 sub list()
 	dim a as string
@@ -167,7 +167,7 @@ sub list()
 			print #1,";"
 			print #1,".quit"
 		close 1
-	shell program +" "+report + " > /dev/null"
+	shell program +" "+report + "  2> /dev/null"
 end sub
 sub add()
 	dim a as string
