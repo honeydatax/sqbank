@@ -24,23 +24,27 @@ sub deletesmoves()
 		print "bank ID: ";
 		input a
 	
-		Open Pipe sqlite +" -header -column  " For output As #1
+		Open Pipe sqlite +" -header -column  > " + report For output As #1
 			print #1,".width 16 25 "
 			print #1,"select ID,name from banks where ID ="+str(a)+";"
 			print #1,"select * from moves where bank ="+str(a)+";"
 			print #1,";"
 			print #1,".quit"
 		close 1
-		print "move ID to delete : ";
-		input b
-		Open Pipe sqlite +" -header -column  > " +report For output As #1
-			print #1,".width 16 25 "
-			print #1,"select * from moves where ID ="+b+";"
-			print #1,"delete from moves where ID ="+b+";"
-			print #1,";"
-			print #1,".quit"
-		close 1
-	shell program +" "+report + nulll
+		shell program +" "+report + nulll
+		do
+				print "type -1 to exit"
+				print "move ID to delete : ";
+				input b
+				if b="-1" then exit sub
+			Open Pipe sqlite +" -header -column  "  For output As #1
+				print #1,".width 16 25 "
+				print #1,"select * from moves where ID ="+b+";"
+				print #1,"delete from moves where ID ="+b+";"
+				print #1,";"
+				print #1,".quit"
+			close 1
+	loop
 end sub 
 sub deletes()
 	dim a as integer
