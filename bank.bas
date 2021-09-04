@@ -7,7 +7,7 @@ const sqlite="sqlite3 "+names
 const nulll=" 2> /dev/null"
 const separeter="--------------------------------"
 const menu=!"zenity --title=menu --height=350 --width=600 --list --text=menu --separator=, --column=menu \"add bank\" \"delete bank and moves\" \"exit\" \"find bank\" \"list bank\" \"add moves\" \"list moves\" \"delete moves\" "+nulll
-
+const calender="zenity --calendar --date-format=%y/%m/%d "+nulll
 sub deletesmoves()
 	dim a as integer
 	dim b as string
@@ -113,11 +113,15 @@ sub reports()
 	shell program +" "+report + nulll
 end sub 
 sub moves()
+	dim y as integer
+	dim x as integer
 	dim a as integer
 	dim b as string
 	dim c as string
 	dim d as double
 	dim e as string
+	dim mm as string
+	dim m as string
 	print "working....."
 		Open Pipe sqlite +" -header -column > " + report For output As #1
 			print #1,".width 16 25 "
@@ -140,10 +144,28 @@ sub moves()
 	print "leave a area of text out to exit"	
 	do
 		print separeter
-		print "dates yyyy\mm\dd: ";
-		line input b
+		'print "dates yyyy\mm\dd: ";
+		'line input b
+	Open Pipe calender For input As #4
+		line input #4,b
+		do
+			if eof(4) then exit do
+			line input #4,mm
+		loop
+		line input #4,mm
+		line input #4,mm
+	close 4
+		do
+			m=inkey()
+			if m="" then exit do
+			
+		loop
+		
 		if b="" then exit sub
 		print "about: ";
+	    'x=pos()
+		'y=csrlin()
+		'locate y,x
 		line input c
 		if c="" then exit sub
 		print "amount - to negative: ";
@@ -163,7 +185,7 @@ sub finds()
 	print "working....."
 		Open Pipe sqlite +" -header -column > " + report For output As #1
 			print #1,".width 16 25 25 25 25 25 "
-			print #1,"select * from banks where name like '"+a+"' order by name;"
+			print #1,"select * from banks where name like '%"+a+"%' order by name;"
 			print #1,";"
 			print #1,".quit"
 		close 1
