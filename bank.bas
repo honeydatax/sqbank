@@ -4,6 +4,7 @@ const report="report.txt"
 const dirs="./database"
 const names="./database/bank.dat"
 const sqlite="sqlite3 "+names
+const nulll=" 2> /dev/null"
 sub deletesmoves()
 	dim a as integer
 	dim b as string
@@ -17,7 +18,7 @@ sub deletesmoves()
 			print #1,";"
 			print #1,".quit"
 		close 1
-	shell program +" "+report + " 2> /dev/null"
+	shell program +" "+report + nulll
 	cls
 		print "bank ID: ";
 		input a
@@ -38,7 +39,7 @@ sub deletesmoves()
 			print #1,";"
 			print #1,".quit"
 		close 1
-	shell program +" "+report + " 2> /dev/null"
+	shell program +" "+report + nulll
 end sub 
 sub deletes()
 	dim a as integer
@@ -53,7 +54,7 @@ sub deletes()
 			print #1,";"
 			print #1,".quit"
 		close 1
-	shell program +" "+report + " 2> /dev/null"
+	shell program +" "+report + nulll
 	cls
 		print "bank ID: ";
 		input a
@@ -72,7 +73,7 @@ sub deletes()
 			print #1,";"
 			print #1,".quit"
 		close 1
-	shell program +" "+report + " 2> /dev/null"
+	shell program +" "+report +nulll
 end sub 
 sub reports()
 	dim a as integer
@@ -87,7 +88,7 @@ sub reports()
 			print #1,";"
 			print #1,".quit"
 		close 1
-	shell program +" "+report + " 2> /dev/null"
+	shell program +" "+report + nulll
 	cls
 		print "bank ID: ";
 		input a
@@ -100,7 +101,7 @@ sub reports()
 			print #1,";"
 			print #1,".quit"
 		close 1
-	shell program +" "+report + " 2> /dev/null"
+	shell program +" "+report + nulll
 end sub 
 sub moves()
 	dim a as integer
@@ -115,7 +116,7 @@ sub moves()
 			print #1,";"
 			print #1,".quit"
 		close 1
-	shell program +" "+report + " 2> /dev/null"
+	shell program +" "+report + nulll
 	cls
 		print "bank ID: ";
 		input a
@@ -156,7 +157,7 @@ sub finds()
 			print #1,";"
 			print #1,".quit"
 		close 1
-	shell program +" "+report + " 2> /dev/null"
+	shell program +" "+report + nulll
 end sub
 sub list()
 	dim a as string
@@ -167,7 +168,7 @@ sub list()
 			print #1,";"
 			print #1,".quit"
 		close 1
-	shell program +" "+report + "  2> /dev/null"
+	shell program +" "+report + nulll
 end sub
 sub add()
 	dim a as string
@@ -218,9 +219,9 @@ color 15,5
 do
 	cls
 	print "menu"
-	print "add bank					a"
-	print "delete bank and moves	d"
-	print "exit						e"
+	print "add bank				a"
+	print "delete bank and moves			d"
+	print "exit					e"
 	print "find bank				f"
 	print "list bank				l"
 	print "add moves				m"
