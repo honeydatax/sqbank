@@ -4,6 +4,77 @@ const report="report.txt"
 const dirs="./database"
 const names="./database/bank.dat"
 const sqlite="sqlite3 "+names
+sub reports()
+	dim a as integer
+	dim b as string
+	dim c as string
+	dim d as double
+	dim e as string
+	print "working....."
+		Open Pipe sqlite +" -header -column > " + report For output As #1
+			print #1,".width 16 25 "
+			print #1,"select ID,name from banks;"
+			print #1,";"
+			print #1,".quit"
+		close 1
+	shell program +" "+report + " > /dev/null"
+	cls
+		print "bank ID: ";
+		input a
+	
+		Open Pipe sqlite +" -header -column  > " +report For output As #1
+			print #1,".width 16 25 "
+			print #1,"select ID,name from banks where ID ="+str(a)+";"
+			print #1,"select * from moves where bank ="+str(a)+";"
+			print #1,"select sum(value) from moves where bank ="+str(a)+";"
+			print #1,";"
+			print #1,".quit"
+		close 1
+	shell program +" "+report + " > /dev/null"
+end sub 
+sub moves()
+	dim a as integer
+	dim b as string
+	dim c as string
+	dim d as double
+	dim e as string
+	print "working....."
+		Open Pipe sqlite +" -header -column > " + report For output As #1
+			print #1,".width 16 25 "
+			print #1,"select ID,name from banks;"
+			print #1,";"
+			print #1,".quit"
+		close 1
+	shell program +" "+report + " > /dev/null"
+	cls
+		print "bank ID: ";
+		input a
+	
+		Open Pipe sqlite +" -header -column  " For output As #1
+			print #1,".width 16 25 "
+			print #1,"select ID,name from banks where ID ="+str(a)+";"
+			print #1,";"
+			print #1,".quit"
+		close 1
+
+	print "leave a area of text out to exit"	
+	do
+		print "dates yyyy\mm\dd: ";
+		line input b
+		if b="" then exit sub
+		print "about: ";
+		line input c
+		if c="" then exit sub
+		print "amount - to negative: ";
+		input d
+		Open Pipe sqlite For output As #1
+			print #1,"insert into moves(bank, date,desig,value) values("+str(a)+",'"+b+"','"+c+"',"+str(d)+");"
+			print #1,";"
+			print #1,".quit"
+		close 1
+	loop
+	
+end sub 
 sub finds()
 	dim a as string
 	print "words to find"
@@ -48,10 +119,10 @@ sub add()
 		if c="" then exit sub
 		print "phone: ";
 		line input d
-		if a="" then exit sub
+		if d="" then exit sub
 		print "about: ";
 		line input e
-		if a="" then exit sub
+		if e="" then exit sub
 		Open Pipe sqlite For output As #1
 			print #1,"insert into banks(name,addrress,email,phone,txs) values('"+a+"','"+b+"','"+c+"','"+d+"','"+e+"');"
 			print #1,";"
@@ -63,7 +134,7 @@ end sub
 sub creates()
 	Open Pipe sqlite For output As #1
 		print #1,"create table banks(ID INTEGER PRIMARY KEY AUTOINCREMENT , name text(25) not null, addrress text(25) not null, email text(25) not null,phone text(25) not null,txs text(25) not null) ; "
-		print #1,"create table moves(ID INTEGER PRIMARY KEY AUTOINCREMENT , date text(10) not null, desig text(25) not null, value double not null); "
+		print #1,"create table moves(ID INTEGER PRIMARY KEY AUTOINCREMENT ,bank integer not null, date text(10) not null, desig text(25) not null, value double not null); "
 		print #1,";"
 		print #1,".quit"
 	close 1
@@ -81,8 +152,8 @@ do
 	print "exit				e"
 	print "find bank			f"
 	print "list bank			l"
-
-
+	print "add moves			m"
+	print "list moves			r"
 	do
 		a=inkey()
 		if a <>"" then exit do 
@@ -91,4 +162,6 @@ do
 	if a="a" or a="A" then add
 	if a="l" or a="L" then list
 	if a="f" or a="F" then finds
+	if a="m" or a="M" then moves
+	if a="r" or a="R" then reports
 loop
