@@ -6,6 +6,8 @@ const names="./database/bank.dat"
 const sqlite="sqlite3 "+names
 const nulll=" 2> /dev/null"
 const separeter="--------------------------------"
+const menu=!"zenity --title=menu --height=350 --width=600 --list --text=menu --separator=, --column=menu \"add bank\" \"delete bank and moves\" \"exit\" \"find bank\" \"list bank\" \"add moves\" \"list moves\" \"delete moves\" "+nulll
+
 sub deletesmoves()
 	dim a as integer
 	dim b as string
@@ -222,30 +224,32 @@ sub creates()
 end sub
 
 dim a as string
+dim b as string
 if not (FileExists(dirs)) then mkdir(dirs)
 if not (FileExists(names)) then creates()
 color 15,5
 do
 	cls
-	print "menu"
-	print "add bank				a"
-	print "delete bank and moves			d"
-	print "exit					e"
-	print "find bank				f"
-	print "list bank				l"
-	print "add moves				m"
-	print "list moves				r"
-	print "delete moves				x"
-	do
-		a=inkey()
-		if a <>"" then exit do 
-	loop
-	if a="e" or a="E" then end 
-	if a="a" or a="A" then add
-	if a="d" or a="D" then deletes
-	if a="l" or a="L" then list
-	if a="f" or a="F" then finds
-	if a="m" or a="M" then moves
-	if a="r" or a="R" then reports
-	if a="x" or a="X" then deletesmoves
+	Open Pipe menu For input As #4
+		line input #4,a
+		do
+			if eof(4) then exit do
+			line input #4,b
+		loop
+	close 4
+	if a="exit" then end 
+		do
+			b=inkey()
+			if b="" then exit do
+			
+		loop
+
+	if a="add bank" then add
+	if a="delete bank and moves" then deletes
+	if a="list bank" then list
+	if a="find bank" then finds
+	if a="add moves" then moves
+	if a="list moves" then reports
+	if a="delete moves" then deletesmoves
+
 loop
