@@ -4,6 +4,76 @@ const report="report.txt"
 const dirs="./database"
 const names="./database/bank.dat"
 const sqlite="sqlite3 "+names
+sub deletesmoves()
+	dim a as integer
+	dim b as string
+	dim c as string
+	dim d as double
+	dim e as string
+	print "working....."
+		Open Pipe sqlite +" -header -column > " + report For output As #1
+			print #1,".width 16 25 "
+			print #1,"select ID,name from banks;"
+			print #1,";"
+			print #1,".quit"
+		close 1
+	shell program +" "+report + " > /dev/null"
+	cls
+		print "bank ID: ";
+		input a
+	
+		Open Pipe sqlite +" -header -column  " For output As #1
+			print #1,".width 16 25 "
+			print #1,"select ID,name from banks where ID ="+str(a)+";"
+			print #1,"select * from moves where bank ="+str(a)+";"
+			print #1,";"
+			print #1,".quit"
+		close 1
+		print "move ID to delete : ";
+		input b
+		Open Pipe sqlite +" -header -column  > " +report For output As #1
+			print #1,".width 16 25 "
+			print #1,"select * from moves where ID ="+b+";"
+			print #1,"delete from moves where ID ="+b+";"
+			print #1,";"
+			print #1,".quit"
+		close 1
+	shell program +" "+report + " > /dev/null"
+end sub 
+sub deletes()
+	dim a as integer
+	dim b as string
+	dim c as string
+	dim d as double
+	dim e as string
+	print "working....."
+		Open Pipe sqlite +" -header -column > " + report For output As #1
+			print #1,".width 16 25 "
+			print #1,"select ID,name from banks;"
+			print #1,";"
+			print #1,".quit"
+		close 1
+	shell program +" "+report + " > /dev/null"
+	cls
+		print "bank ID: ";
+		input a
+	
+		Open Pipe sqlite +" -header -column  " For output As #1
+			print #1,".width 16 25 "
+			print #1,"select ID,name from banks where ID ="+str(a)+";"
+			print #1,"delete from moves where bank ="+str(a)+";"
+			print #1,"delete from banks where ID ="+str(a)+";"
+			print #1,";"
+			print #1,".quit"
+		close 1
+		Open Pipe sqlite +" -header -column  > " +report For output As #1
+			print #1,".width 16 25 "
+			print #1,"select * from banks ;"
+			print #1,";"
+			print #1,".quit"
+		close 1
+	shell program +" "+report + " > /dev/null"
+end sub 
 sub reports()
 	dim a as integer
 	dim b as string
@@ -148,20 +218,24 @@ color 15,5
 do
 	cls
 	print "menu"
-	print "add bank			a"
-	print "exit				e"
-	print "find bank			f"
-	print "list bank			l"
-	print "add moves			m"
-	print "list moves			r"
+	print "add bank					a"
+	print "delete bank and moves	d"
+	print "exit						e"
+	print "find bank				f"
+	print "list bank				l"
+	print "add moves				m"
+	print "list moves				r"
+	print "delete moves				x"
 	do
 		a=inkey()
 		if a <>"" then exit do 
 	loop
 	if a="e" or a="E" then end 
 	if a="a" or a="A" then add
+	if a="d" or a="D" then deletes
 	if a="l" or a="L" then list
 	if a="f" or a="F" then finds
 	if a="m" or a="M" then moves
 	if a="r" or a="R" then reports
+	if a="x" or a="X" then deletesmoves
 loop
