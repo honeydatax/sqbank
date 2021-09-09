@@ -1,0 +1,109 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,64,64)
+  Background = Color.DarkMagenta
+  Foreground = Color.White
+  Utility = True
+  { TabStrip1 TabStrip
+    MoveScaled(0,1,62,60)
+    Background = Color.DarkMagenta
+    Foreground = Color.White
+    Count = 2
+    Index = 0
+    Text = ("list acounts")
+    { TableView1 TableView
+      MoveScaled(1,1,60,54)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+    }
+    Index = 1
+    Text = ("adds acounts")
+    { Label1 Label
+      MoveScaled(1,1,16,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      ToolTip = (" ID")
+      Text = (" ID")
+      Border = Border.Raised
+    }
+    { Label2 Label
+      MoveScaled(1,4,16,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      ToolTip = (" Name")
+      Text = (" Name")
+      Border = Border.Raised
+    }
+    { Label3 Label
+      MoveScaled(1,7,16,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      ToolTip = (" Email")
+      Text = (" Email")
+      Border = Border.Raised
+    }
+    { Label4 Label
+      MoveScaled(1,10,16,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      ToolTip = (" Address")
+      Text = (" Address")
+      Border = Border.Raised
+    }
+    { Label5 Label
+      MoveScaled(1,13,16,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      ToolTip = (" Phone")
+      Text = (" Phone")
+      Border = Border.Raised
+    }
+    { Label6 Label
+      MoveScaled(1,16,16,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      ToolTip = (" Postal")
+      Text = (" Postal")
+      Border = Border.Raised
+    }
+    { TextBox1 TextBox
+      MoveScaled(17,1,43,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+    }
+    { TextBox2 TextBox
+      MoveScaled(17,4,43,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+    }
+    { TextBox3 TextBox
+      MoveScaled(17,7,43,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+    }
+    { TextBox4 TextBox
+      MoveScaled(17,10,43,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+    }
+    { TextBox5 TextBox
+      MoveScaled(17,13,43,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+    }
+    { TextBox6 TextBox
+      MoveScaled(17,16,43,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+    }
+    { Button1 Button
+      MoveScaled(1,20,14,5)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      ToolTip = ("ADD Record")
+      Text = ("ADD Record")
+    }
+    Index = 0
+  }
+}

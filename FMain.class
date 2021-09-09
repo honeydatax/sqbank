@@ -1,0 +1,81 @@
+' Gambas class file
+
+Const databases As String = "sqlmoney.lite" 
+Public dbc3 As New Connection
+
+
+Public Sub Form_Open()
+    Dim n As Integer
+    Dim dbc As New Connection
+    Dim dbc2 As New Connection
+    Dim htable As Table
+    Dim htable2 As Table
+  If Not Exist(User.Home & "/" & databases) Then
+    dbc.type = "sqlite"
+    dbc.host = User.Home
+    dbc.Name = ""
+    dbc.Open
+    dbc.Databases.Add(databases)
+    dbc.Close
+    dbc2.type = "sqlite"
+    dbc2.host = User.Home
+    dbc2.name = databases
+    dbc2.Open
+    htable = dbc2.Tables.Add("acounts")
+    htable.Fields.Add("ID", db.Integer)
+    htable.Fields.Add("names", db.String, 30)
+    htable.Fields.Add("emails", db.String, 25)
+    htable.Fields.Add("address", db.String, 25)
+    htable.Fields.Add("phone", db.String, 25)
+    htable.Fields.Add("postal", db.String, 25)
+    htable.PrimaryKey = ["ID"]
+    htable.Update()
+    htable2 = dbc2.Tables.Add("moves")
+    htable2.Fields.Add("ID", db.Integer)
+    htable2.Fields.Add("dates", db.Date)
+    htable2.Fields.Add("names", db.String, 30)
+    htable2.Fields.Add("value", db.Float)
+    htable2.PrimaryKey = ["ID"]
+    htable2.Update()
+    dbc2.Close
+   End If
+    dbc3.type = "sqlite"
+    dbc3.host = User.Home
+    dbc3.name = databases
+    dbc3.Open
+    TableView1.Columns.Count = 6
+    reloads()
+  End
+
+Public Sub reloads()
+  Dim n As Integer
+  Dim rs As Result
+   rs = dbc3.Exec("select * from acounts")  
+   rs.MoveFirst()
+   If rs.Available Then
+    TableView1.rows.Count = rs.Count + 1
+    TableView1[0, 0].Text = "ID"
+    TableView1[0, 1].Text = "NAME"
+    TableView1[0, 2].Text = "email"
+    TableView1[0, 3].Text = "address"
+    TableView1[0, 4].Text = "phone"
+    TableView1[0, 5].Text = "postal"
+    For n = 1 To rs.Count
+      Print n
+      TableView1[n, 0].Text = rs!ID
+      TableView1[n, 1].Text = rs!names
+      TableView1[n, 2].Text = rs!emails
+      TableView1[n, 3].Text = rs!address
+      TableView1[n, 4].Text = rs!phone
+      TableView1[n, 5].Text = rs!postal
+      rs.MoveNext()
+    Next
+  End If
+End
+
+Public Sub Button1_Click()
+Dim rs As Result
+  rs = dbc3.Exec("insert into acounts(ID,names,emails,address,phone,postal)values('" & TextBox1.Text & "','" & TextBox2.Text & "','" & TextBox3.Text & "','" & TextBox4.Text & "','" & TextBox5.Text & "','" & TextBox6.Text & "');")  
+  
+   reloads()
+End 
