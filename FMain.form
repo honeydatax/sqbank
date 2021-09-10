@@ -6,10 +6,10 @@
   Foreground = Color.White
   Utility = True
   { TabStrip1 TabStrip
-    MoveScaled(0,1,62,60)
+    MoveScaled(0,0,77,62)
     Background = Color.DarkMagenta
     Foreground = Color.White
-    Count = 2
+    Count = 4
     Index = 0
     Text = ("list acounts")
     { TableView1 TableView
@@ -99,6 +99,111 @@
     }
     { Button1 Button
       MoveScaled(1,20,14,5)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      ToolTip = ("ADD Record")
+      Text = ("ADD Record")
+    }
+    Index = 2
+    Text = ("moves ")
+    { TextBox7 TextBox
+      MoveScaled(14,0,22,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      Text = ("0")
+    }
+    { TextBox8 TextBox
+      MoveScaled(0,3,36,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+    }
+    { Label7 Label
+      MoveScaled(0,0,14,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      Text = ("Acount ID")
+      Border = Border.Raised
+    }
+    { TableView2 TableView
+      MoveScaled(-1,6,63,46)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+    }
+    { Button2 Button
+      MoveScaled(38,1,21,4)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      Text = ("find >>>>")
+    }
+    Index = 3
+    Text = ("add move")
+    { Label8 Label
+      MoveScaled(0,0,16,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      ToolTip = (" ID")
+      Text = (" ID")
+      Border = Border.Raised
+    }
+    { Label9 Label
+      MoveScaled(0,3,16,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      ToolTip = ("acount")
+      Text = ("acount")
+      Border = Border.Raised
+    }
+    { Label10 Label
+      MoveScaled(0,6,16,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      ToolTip = ("date")
+      Text = ("date")
+      Border = Border.Raised
+    }
+    { Label11 Label
+      MoveScaled(0,9,16,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      ToolTip = ("names")
+      Text = ("names")
+      Border = Border.Raised
+    }
+    { Label12 Label
+      MoveScaled(0,12,16,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      ToolTip = ("value")
+      Text = ("value")
+      Border = Border.Raised
+    }
+    { TextBox9 TextBox
+      MoveScaled(16,0,43,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+    }
+    { TextBox10 TextBox
+      MoveScaled(16,3,43,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+    }
+    { TextBox11 TextBox
+      MoveScaled(16,6,43,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+    }
+    { TextBox12 TextBox
+      MoveScaled(16,9,43,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+    }
+    { TextBox13 TextBox
+      MoveScaled(16,12,43,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+    }
+    { Button3 Button
+      MoveScaled(0,15,14,5)
       Background = Color.DarkMagenta
       Foreground = Color.White
       ToolTip = ("ADD Record")

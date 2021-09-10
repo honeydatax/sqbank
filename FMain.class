@@ -5,12 +5,59 @@ Public dbc3 As New Connection
 
 
 Public Sub Form_Open()
+
+  If Not Exist(User.Home & "/" & databases) Then
+    createdatabase()
+   End If
+    dbc3.type = "sqlite"
+    dbc3.host = User.Home
+    dbc3.name = databases
+    dbc3.Open
+    TableView1.Columns.Count = 6
+    TableView2.Columns.Count = 5
+    reloads()
+  End
+
+Public Sub reloads()
+  Dim n As Integer
+  Dim rs As Result
+   rs = dbc3.Exec("select * from acounts")  
+   rs.MoveFirst()
+   TableView1.Clear()
+   If rs.Available Then
+       
+    TableView1.rows.Count = rs.Count + 1
+    TableView1[0, 0].Text = "ID"
+    TableView1[0, 1].Text = "NAME"
+    TableView1[0, 2].Text = "email"
+    TableView1[0, 3].Text = "address"
+    TableView1[0, 4].Text = "phone"
+    TableView1[0, 5].Text = "postal"
+    For n = 1 To rs.Count
+   
+      TableView1[n, 0].Text = rs!ID
+      TableView1[n, 1].Text = rs!names
+      TableView1[n, 2].Text = rs!emails
+      TableView1[n, 3].Text = rs!address
+      TableView1[n, 4].Text = rs!phone
+      TableView1[n, 5].Text = rs!postal
+      rs.MoveNext()
+    Next
+  End If
+End
+
+Public Sub Button1_Click()
+Dim rs As Result
+  rs = dbc3.Exec("insert into acounts(ID,names,emails,address,phone,postal)values('" & TextBox1.Text & "','" & TextBox2.Text & "','" & TextBox3.Text & "','" & TextBox4.Text & "','" & TextBox5.Text & "','" & TextBox6.Text & "');")  
+  
+   reloads()
+End 
+Public Sub createdatabase()
     Dim n As Integer
     Dim dbc As New Connection
     Dim dbc2 As New Connection
     Dim htable As Table
     Dim htable2 As Table
-  If Not Exist(User.Home & "/" & databases) Then
     dbc.type = "sqlite"
     dbc.host = User.Home
     dbc.Name = ""
@@ -32,50 +79,59 @@ Public Sub Form_Open()
     htable.Update()
     htable2 = dbc2.Tables.Add("moves")
     htable2.Fields.Add("ID", db.Integer)
+    htable2.Fields.Add("acount", db.integer)
     htable2.Fields.Add("dates", db.Date)
     htable2.Fields.Add("names", db.String, 30)
     htable2.Fields.Add("value", db.Float)
     htable2.PrimaryKey = ["ID"]
     htable2.Update()
     dbc2.Close
-   End If
-    dbc3.type = "sqlite"
-    dbc3.host = User.Home
-    dbc3.name = databases
-    dbc3.Open
-    TableView1.Columns.Count = 6
-    reloads()
-  End
+End
 
-Public Sub reloads()
+Public Sub listmoves()
   Dim n As Integer
   Dim rs As Result
-   rs = dbc3.Exec("select * from acounts")  
+  Dim rs1 As Result
+   rs1 = dbc3.Exec("select * from acounts where ID=" & TextBox7.text)  
+   If rs1.Available Then
+     rs1.MoveFirst()
+     TextBox8.text = rs1!names
+   Endif
+   rs = dbc3.Exec("select * from moves where acount=" & TextBox7.text)  
    rs.MoveFirst()
+   TableView2.Clear()
    If rs.Available Then
-    TableView1.rows.Count = rs.Count + 1
-    TableView1[0, 0].Text = "ID"
-    TableView1[0, 1].Text = "NAME"
-    TableView1[0, 2].Text = "email"
-    TableView1[0, 3].Text = "address"
-    TableView1[0, 4].Text = "phone"
-    TableView1[0, 5].Text = "postal"
+    TableView2.rows.Count = rs.Count + 1
+    TableView2[0, 0].Text = "ID"
+    TableView2[0, 1].Text = "acount"
+    TableView2[0, 2].Text = "dates"
+    TableView2[0, 3].Text = "names"
+    TableView2[0, 4].Text = "value"
     For n = 1 To rs.Count
-      Print n
-      TableView1[n, 0].Text = rs!ID
-      TableView1[n, 1].Text = rs!names
-      TableView1[n, 2].Text = rs!emails
-      TableView1[n, 3].Text = rs!address
-      TableView1[n, 4].Text = rs!phone
-      TableView1[n, 5].Text = rs!postal
+
+      TableView2[n, 0].Text = rs!ID
+      TableView2[n, 1].Text = rs!acount
+      TableView2[n, 2].Text = rs!dates
+      TableView2[n, 3].Text = rs!names
+      TableView2[n, 4].Text = rs!value
       rs.MoveNext()
     Next
   End If
+  
+  
+  
+End
+Public Sub Button2_Click()
+
+  listmoves()
+
 End
 
-Public Sub Button1_Click()
+Public Sub Button3_Click()
 Dim rs As Result
-  rs = dbc3.Exec("insert into acounts(ID,names,emails,address,phone,postal)values('" & TextBox1.Text & "','" & TextBox2.Text & "','" & TextBox3.Text & "','" & TextBox4.Text & "','" & TextBox5.Text & "','" & TextBox6.Text & "');")  
+  rs = dbc3.Exec("insert into moves(ID,acount,dates,names,value)values('" & TextBox9.Text & "','" & TextBox10.Text & "','" & TextBox11.Text & "','" & TextBox12.Text & "','" & TextBox13.Text & "');")  
+  listmoves()  
   
-   reloads()
 End 
+
+  
