@@ -135,6 +135,12 @@
       Foreground = Color.White
       Text = ("find >>>>")
     }
+    { Label13 Label
+      MoveScaled(3,54,45,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      Text = ("0")
+    }
     Index = 3
     Text = ("add move")
     { Label8 Label

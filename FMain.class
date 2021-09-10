@@ -92,6 +92,13 @@ Public Sub listmoves()
   Dim n As Integer
   Dim rs As Result
   Dim rs1 As Result
+  Dim rs2 As Result
+   rs2 = dbc3.Exec("select SUM(value) from moves where acount==" & TextBox7.text)  
+   If rs2.Available Then
+     rs2.MoveFirst()
+     Label13.Caption = Str(rs2["SUM(value)"])
+   Endif
+
    rs1 = dbc3.Exec("select * from acounts where ID=" & TextBox7.text)  
    If rs1.Available Then
      rs1.MoveFirst()
