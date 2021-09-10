@@ -77,14 +77,15 @@ Public Sub createdatabase()
     htable.Fields.Add("postal", db.String, 25)
     htable.PrimaryKey = ["ID"]
     htable.Update()
-    htable2 = dbc2.Tables.Add("moves")
-    htable2.Fields.Add("ID", db.Integer)
-    htable2.Fields.Add("acount", db.integer)
-    htable2.Fields.Add("dates", db.Date)
-    htable2.Fields.Add("names", db.String, 30)
-    htable2.Fields.Add("value", db.Float)
-    htable2.PrimaryKey = ["ID"]
-    htable2.Update()
+    dbc2.Exec("create table moves(ID INTEGER PRIMARY KEY AUTOINCREMENT ,acount integer not null, dates text(10) not null, names text(25) not null, value float not null); ")
+   ' htable2 = dbc2.Tables.Add("moves")
+   ' htable2.Fields.Add("ID", db.Integer)
+   ' htable2.Fields.Add("acount", db.integer)
+   ' htable2.Fields.Add("dates", db.Date)
+   ' htable2.Fields.Add("names", db.String, 30)
+   ' htable2.Fields.Add("value", db.Float)
+   ' htable2.PrimaryKey = ["ID AUTOINCREMENT"]
+    'htable2.Update()
     dbc2.Close
 End
 
@@ -136,7 +137,7 @@ End
 
 Public Sub Button3_Click()
 Dim rs As Result
-  rs = dbc3.Exec("insert into moves(ID,acount,dates,names,value)values('" & TextBox9.Text & "','" & TextBox10.Text & "','" & TextBox11.Text & "','" & TextBox12.Text & "','" & TextBox13.Text & "');")  
+  rs = dbc3.Exec("insert into moves(acount,dates,names,value)values('" & TextBox10.Text & "','" & TextBox11.Text & "','" & TextBox12.Text & "','" & TextBox13.Text & "');")  
   listmoves()  
   
 End 

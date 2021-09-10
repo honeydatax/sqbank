@@ -145,6 +145,7 @@
     Text = ("add move")
     { Label8 Label
       MoveScaled(0,0,16,3)
+      Visible = False
       Background = Color.DarkMagenta
       Foreground = Color.White
       ToolTip = (" ID")
@@ -185,6 +186,7 @@
     }
     { TextBox9 TextBox
       MoveScaled(16,0,43,3)
+      Visible = False
       Background = Color.DarkMagenta
       Foreground = Color.White
     }
