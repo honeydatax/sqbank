@@ -6,7 +6,7 @@
   Foreground = Color.White
   Utility = True
   { TabStrip1 TabStrip
-    MoveScaled(0,0,77,62)
+    MoveScaled(0,1,77,62)
     Background = Color.DarkMagenta
     Foreground = Color.White
     Count = 4
@@ -103,6 +103,23 @@
       Foreground = Color.White
       ToolTip = ("ADD Record")
       Text = ("ADD Record")
+    }
+    { Label14 Label
+      MoveScaled(1,27,11,4)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      Text = (" ID:")
+    }
+    { TextBox14 TextBox
+      MoveScaled(13,28,43,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+    }
+    { Button4 Button
+      MoveScaled(1,33,12,5)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      Text = ("delete")
     }
     Index = 2
     Text = ("moves ")
@@ -216,6 +233,23 @@
       Foreground = Color.White
       ToolTip = ("ADD Record")
       Text = ("ADD Record")
+    }
+    { TextBox15 TextBox
+      MoveScaled(12,22,43,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+    }
+    { Label15 Label
+      MoveScaled(0,21,11,4)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      Text = (" ID:")
+    }
+    { Button5 Button
+      MoveScaled(0,26,12,5)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      Text = ("delete")
     }
     Index = 0
   }

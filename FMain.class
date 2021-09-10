@@ -78,14 +78,6 @@ Public Sub createdatabase()
     htable.PrimaryKey = ["ID"]
     htable.Update()
     dbc2.Exec("create table moves(ID INTEGER PRIMARY KEY AUTOINCREMENT ,acount integer not null, dates text(10) not null, names text(25) not null, value float not null); ")
-   ' htable2 = dbc2.Tables.Add("moves")
-   ' htable2.Fields.Add("ID", db.Integer)
-   ' htable2.Fields.Add("acount", db.integer)
-   ' htable2.Fields.Add("dates", db.Date)
-   ' htable2.Fields.Add("names", db.String, 30)
-   ' htable2.Fields.Add("value", db.Float)
-   ' htable2.PrimaryKey = ["ID AUTOINCREMENT"]
-    'htable2.Update()
     dbc2.Close
 End
 
@@ -143,3 +135,22 @@ Dim rs As Result
 End 
 
   
+
+Public Sub Button4_Click()
+     Dim rs As Result
+  		rs = dbc3.Exec("delete from moves where acount =" & TextBox14.text & "; ")
+  		rs = dbc3.Exec("delete from acounts where ID =" & TextBox14.text & "; ")
+      reloads()
+      listmoves()
+
+End
+
+Public Sub Button5_Click()
+     Dim rs As Result
+  		rs = dbc3.Exec("delete from moves where ID =" & TextBox15.text & "; ")
+      reloads()
+      listmoves()
+
+  
+
+End
