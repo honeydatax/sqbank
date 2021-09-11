@@ -263,3 +263,75 @@ Public Sub Button6_Click()
     Catch
       Message.Warning("error :" & Error.Text, "ok")
 End
+
+Public Sub reportacounts()
+  Dim n As Integer
+  Dim rs As Result
+  Dim f45 As String
+  Dim ids As String
+  Dim f As File 
+  f45 = String(45, " _ ")
+    f = Open user.Home & "/" & reportss For Create
+   rs = dbc3.Exec("select * from acounts")  
+   rs.MoveFirst()
+   TableView1.Clear()
+   If rs.Available Then
+       
+    TableView1.rows.Count = rs.Count + 1
+      ids = "ID"
+      ids = ids & Space(45 - Len(ids)) & "|"
+     Print #f, ids;
+    ids = "NAME"
+      ids = ids & Space(45 - Len(ids)) & "|"
+     Print #f, ids;
+
+    ids = "email"
+      ids = ids & Space(45 - Len(ids)) & "|"
+     Print #f, ids;
+
+    ids = "address"
+      ids = ids & Space(45 - Len(ids)) & "|"
+     Print #f, ids;
+
+    ids = "phone"
+      ids = ids & Space(45 - Len(ids)) & "|"
+     Print #f, ids;
+
+    ids = "postal"
+      ids = ids & Space(45 - Len(ids)) & "|"
+     Print #f, ids
+    For n = 1 To rs.Count
+      ids = rs!ID
+      ids = ids & Space(45 - Len(ids)) & "|"
+     Print #f, ids;
+      ids = rs!names
+      ids = ids & Space(45 - Len(ids)) & "|"
+     Print #f, ids;
+      ids = rs!emails
+      ids = ids & Space(45 - Len(ids)) & "|"
+     Print #f, ids;
+      ids = rs!address
+      ids = ids & Space(45 - Len(ids)) & "|"
+     Print #f, ids;
+      ids = rs!phone
+      ids = ids & Space(45 - Len(ids)) & "|"
+     Print #f, ids;
+      ids = rs!postal
+      ids = ids & Space(45 - Len(ids)) & "|"
+     Print #f, ids
+      rs.MoveNext()
+    Next
+  End If
+Close #f
+    Finally
+    Catch
+      Message.Warning("error :" & Error.Text, "ok")
+End
+
+Public Sub Button7_Click()
+
+    reportacounts()  
+    Finally
+    Catch
+      Message.Warning("error :" & Error.Text, "ok")
+End

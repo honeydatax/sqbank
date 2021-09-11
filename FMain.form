@@ -121,6 +121,12 @@
       Foreground = Color.White
       Text = ("delete")
     }
+    { Button7 Button
+      MoveScaled(1,40,12,5)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      Text = ("report.txt")
+    }
     Index = 2
     Text = ("moves ")
     { TextBox7 TextBox
