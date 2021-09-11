@@ -14,11 +14,11 @@ Public Sub Form_Open()
     dbc3.name = databases
     dbc3.Open
     TableView1.Columns.Count = 6
-    TableView2.Columns.Count = 5
+    TableView2.Columns.Count = 6
     reloads()
     Finally
     Catch
-      Message.Warning("error :" + Error.Text, "ok")
+      Message.Warning("error :" & Error.Text, "ok")
   End
 
 Public Sub reloads()
@@ -49,7 +49,7 @@ Public Sub reloads()
   End If
     Finally
     Catch
-      Message.Warning("error :" + Error.Text, "ok")
+      Message.Warning("error :" & Error.Text, "ok")
 End
 
 Public Sub Button1_Click()
@@ -58,7 +58,7 @@ Dim rs As Result
    reloads()
     Finally
     Catch
-      Message.Warning("error :" + Error.Text, "ok")
+      Message.Warning("error :" & Error.Text, "ok")
 End 
 Public Sub createdatabase()
     Dim n As Integer
@@ -89,7 +89,7 @@ Public Sub createdatabase()
     dbc2.Close
     Finally
     Catch
-      Message.Warning("error :" + Error.Text, "ok")
+      Message.Warning("error :" & Error.Text, "ok")
 End
 
 Public Sub listmoves()
@@ -97,6 +97,7 @@ Public Sub listmoves()
   Dim rs As Result
   Dim rs1 As Result
   Dim rs2 As Result
+  Dim sums As Float
    rs2 = dbc3.Exec("select SUM(value) from moves where acount==" & TextBox7.text)  
    If rs2.Available Then
      rs2.MoveFirst()
@@ -111,6 +112,7 @@ Public Sub listmoves()
    rs = dbc3.Exec("select * from moves where acount=" & TextBox7.text)  
    rs.MoveFirst()
    TableView2.Clear()
+   sums = 0
    If rs.Available Then
     TableView2.rows.Count = rs.Count + 1
     TableView2[0, 0].Text = "ID"
@@ -118,25 +120,27 @@ Public Sub listmoves()
     TableView2[0, 2].Text = "dates"
     TableView2[0, 3].Text = "names"
     TableView2[0, 4].Text = "value"
+    TableView2[0, 5].Text = "==sums"
     For n = 1 To rs.Count
-
+      sums = sums + rs!value
       TableView2[n, 0].Text = rs!ID
       TableView2[n, 1].Text = rs!acount
       TableView2[n, 2].Text = rs!dates
       TableView2[n, 3].Text = rs!names
       TableView2[n, 4].Text = rs!value
+      TableView2[n, 5].Text = Str(sums)
       rs.MoveNext()
     Next
   End If
     Finally
     Catch
-      Message.Warning("error :" + Error.Text, "ok")
+      Message.Warning("error :" & Error.Text, "ok")
 End
 Public Sub Button2_Click()
   listmoves()
     Finally
     Catch
-      Message.Warning("error :" + Error.Text, "ok")
+      Message.Warning("error :" & Error.Text, "ok")
 End
 
 Public Sub Button3_Click()
@@ -145,7 +149,7 @@ Dim rs As Result
   listmoves()  
     Finally
     Catch
-      Message.Warning("error :" + Error.Text, "ok")
+      Message.Warning("error :" & Error.Text, "ok")
 End 
 
   
@@ -158,7 +162,7 @@ Public Sub Button4_Click()
       listmoves()
     Finally
     Catch
-      Message.Warning("error :" + Error.Text, "ok")
+      Message.Warning("error :" & Error.Text, "ok")
 End
 
 Public Sub Button5_Click()
@@ -168,7 +172,7 @@ Public Sub Button5_Click()
       listmoves()
     Finally
     Catch
-      Message.Warning("error :" + Error.Text, "ok")
+      Message.Warning("error :" & Error.Text, "ok")
   
 
 End
