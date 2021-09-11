@@ -13,9 +13,15 @@
     Index = 0
     Text = ("list acounts")
     { TableView1 TableView
-      MoveScaled(1,1,60,54)
+      MoveScaled(1,1,60,53)
       Background = Color.DarkMagenta
       Foreground = Color.White
+    }
+    { Label17 Label
+      MoveScaled(1,55,21,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      Text = ("0")
     }
     Index = 1
     Text = ("adds acounts")

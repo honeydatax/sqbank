@@ -36,6 +36,7 @@ Public Sub reloads()
     TableView1[0, 3].Text = "address"
     TableView1[0, 4].Text = "phone"
     TableView1[0, 5].Text = "postal"
+    TableView1[0, 6].Text = "===SUM"
     For n = 1 To rs.Count
    
       TableView1[n, 0].Text = rs!ID
@@ -48,6 +49,9 @@ Public Sub reloads()
       rs.MoveNext()
     Next
   End If
+     rs = dbc3.Exec("select *,SUM(value) from moves")  
+     rs.MoveFirst()
+     Label17.Caption = rs["SUM(value)"]
     Finally
     Catch
       Message.Warning("error :" & Error.Text, "ok")
@@ -110,7 +114,7 @@ Public Sub listmoves()
      rs1.MoveFirst()
      TextBox8.text = rs1!names
    Endif
-   rs = dbc3.Exec("select * from moves where acount=" & TextBox7.text)  
+   rs = dbc3.Exec("select * from moves where acount=" & TextBox7.text & " order by dates")  
    rs.MoveFirst()
    TableView2.Clear()
    sums = 0
@@ -335,4 +339,10 @@ Public Sub Button7_Click()
     Finally
     Catch
       Message.Warning("error :" & Error.Text, "ok")
+End
+
+Public Sub TabStrip1_Click()
+
+  
+
 End
