@@ -2,7 +2,7 @@
 
 Const databases As String = "sqlmoney.lite" 
 Public dbc3 As New Connection
-
+Public Const reportss As String = "report.txt"
 
 Public Sub Form_Open()
 
@@ -175,4 +175,91 @@ Public Sub Button5_Click()
       Message.Warning("error :" & Error.Text, "ok")
   
 
+End
+Public Sub reportsmoves()
+  Dim n As Integer
+  Dim rs As Result
+  Dim rs1 As Result
+  Dim rs2 As Result
+  Dim sums As Float
+  Dim f As File
+  Dim f45 As String
+  Dim IDs As String
+  Dim acountss As String
+  Dim ddates As String
+  Dim namess As String
+  Dim valuess As String
+  Dim sumss As String
+  f45 = String(45, " _ ")
+    f = Open user.Home & "/" & reportss For Create
+    rs1 = dbc3.Exec("select * from acounts where ID=" & TextBox16.text)  
+   If rs1.Available Then
+     rs1.MoveFirst()
+     Print #f, TextBox16.text
+     Print #f, rs1!names
+   Endif
+   Print #f, f45
+   rs = dbc3.Exec("select * from moves where acount=" & TextBox16.text)  
+   rs.MoveFirst()
+   sums = 0
+   If rs.Available Then
+      ids = "ID"
+      ids = ids & Space(45 - Len(ids)) & "|"
+     Print #f, ids;
+     ids = "acount"
+     ids = ids & Space(45 - Len(ids)) & "|"
+     Print #f, ids;
+     ids = "dates"
+     ids = ids & Space(45 - Len(ids)) & "|"
+     Print #f, ids;
+     ids = "names"
+     ids = ids & Space(45 - Len(ids)) & "|"
+     Print #f, ids;
+     ids = "value"
+     ids = ids & Space(45 - Len(ids)) & "|"
+     Print #f, ids;
+     ids = "==sums"
+     ids = ids & Space(45 - Len(ids)) & "|"
+     Print #f, ids
+     For n = 1 To rs.Count
+       sums = sums + rs!value
+      ids = rs!ID
+     ids = ids & Space(45 - Len(ids)) & "|"
+      Print #f, ids;
+     ids = rs!acount
+      ids = ids & Space(45 - Len(ids)) & "|"
+     Print #f, ids;
+      ids = rs!dates
+      ids = ids & Space(45 - Len(ids)) & "|"
+      Print #f, ids;
+     ids = rs!dates
+      ids = ids & Space(45 - Len(ids)) & "|"
+     Print #f, ids;
+      ids = rs!value
+      ids = ids & Space(45 - Len(ids)) & "|"
+      Print #f, ids;
+      ids = Str(sums)
+      ids = ids & Space(45 - Len(ids)) & "|"
+      Print #f, ids
+      rs.MoveNext()
+    Next
+   Print #f, f45
+   rs2 = dbc3.Exec("select SUM(value) from moves where acount==" & TextBox16.text)  
+   If rs2.Available Then
+     rs2.MoveFirst()
+        Print #f, Str(rs2["SUM(value)"])
+   Endif
+Close #f
+  End If
+    Finally
+    Catch
+      Message.Warning("error :" & Error.Text, "ok")
+End
+
+
+Public Sub Button6_Click()
+  reportsmoves()
+    Finally
+    Catch
+      Message.Warning("error :" & Error.Text, "ok")
 End
