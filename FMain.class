@@ -13,7 +13,7 @@ Public Sub Form_Open()
     dbc3.host = User.Home
     dbc3.name = databases
     dbc3.Open
-    TableView1.Columns.Count = 6
+    TableView1.Columns.Count = 7
     TableView2.Columns.Count = 6
     reloads()
     Finally
@@ -24,7 +24,7 @@ Public Sub Form_Open()
 Public Sub reloads()
   Dim n As Integer
   Dim rs As Result
-   rs = dbc3.Exec("select * from acounts")  
+   rs = dbc3.Exec("select * ,SUM(moves.value) from acounts inner join moves on moves.acount=acounts.ID order by acounts.names ")  
    rs.MoveFirst()
    TableView1.Clear()
    If rs.Available Then
@@ -44,6 +44,7 @@ Public Sub reloads()
       TableView1[n, 3].Text = rs!address
       TableView1[n, 4].Text = rs!phone
       TableView1[n, 5].Text = rs!postal
+      TableView1[n, 6].Text = rs["SUM(moves.value)"]
       rs.MoveNext()
     Next
   End If
