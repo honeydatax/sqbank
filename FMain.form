@@ -251,6 +251,23 @@
       Foreground = Color.White
       Text = ("delete")
     }
+    { TextBox16 TextBox
+      MoveScaled(11,33,43,3)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+    }
+    { Label16 Label
+      MoveScaled(0,32,11,4)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      Text = (" ID:")
+    }
+    { Button6 Button
+      MoveScaled(1,37,12,5)
+      Background = Color.DarkMagenta
+      Foreground = Color.White
+      Text = ("report.txt")
+    }
     Index = 0
   }
 }
